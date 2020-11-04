@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
-
+import logo from "./logo.svg";
+import "./App.css";
+import Home from "./pages/home";
+import SignIn from "./pages/login";
+import MovieDetail from "./pages/movie-detail";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import Header from "./components/header";
+import Booking from "./pages/booking";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+        <Header />
+        {/* url : http://localhost:3000/sign-in */}
+        <Switch>
+          {/* http://localhost:3000/ */}
+          <Route path="/" exact={true}>
+            <Home />
+          </Route>
+          {/* http://localhost:3000/sign-in */}
+          <Route path="/sign-in">
+            <SignIn />
+          </Route>
+          <Route path="/movie-detail/:movieCode">
+            <MovieDetail />
+          </Route>
+
+          <Route path="/booking/:maLichChieu">
+            <Booking />
+          </Route>
+
+          {/* khi url : http://localhost:3000/home => http://localhost:3000/ */}
+          <Route path="/home">
+            <Redirect to="/" />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
